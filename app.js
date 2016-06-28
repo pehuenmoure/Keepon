@@ -73,6 +73,10 @@ app.get('/', function(req, res){
 		args.phrasesleft = phrases14;
 		args.phrasesright = empty;
 		res.render('interface', args);
+	}else if (req.query.type == 'context-specific') {
+		args.phrasesleft = phrases15;
+		args.phrasesright = empty;
+		res.render('interface', args);
 	}else{
 		args.phrasesleft = empty;
 		args.phrasesright = empty;
