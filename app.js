@@ -112,7 +112,7 @@ function getAudio(text, finishCallback){
 	var url = urlStart;
 	console.log(url);
 
-	var body = '{ "text": "<speak><prosody pitch=\\"+40Hz\\">' + text + '</prosody></speak>" }';
+	var body = '{ "text": "<speak><prosody pitch=\\"+30Hz\\"><prosody rate=\\"-10.0%\\">' + text + '</prosody></prosody></speak>" }';
 	console.log(body);
 
 	//var stream = fs.createWriteStream('public/audio/' + 'test' +'.wav');
