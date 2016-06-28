@@ -7,8 +7,8 @@ var arr = [  "I was created 5 years ago. That would make me 5 years old.",
 "Look at that big ice cream. Can you make an ice cream cone with your favorite flavor?", 
 "Hmm... Let me think", 
 "Well, let me see...", 
-"Sorry about that. I had to restart my computer. But I am all right now.",
+"Sorry about that. I had to restart my computer. But I am all right now."
 
-
+]
 
 module.exports = arr;
