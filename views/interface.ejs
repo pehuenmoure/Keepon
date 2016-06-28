@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<!-- Latest compiled and minified CSS -->
+	<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous"> -->
+
+	<!-- Optional theme -->
+	<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous"> -->
+
+	<!-- Latest compiled and minified JavaScript -->
+	<!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script> -->
+
+	<link href="bootstrap.min.css" rel="stylesheet">
+	<link href="bootstrap-theme.min.css" rel="stylesheet">
+	<link href="simple-sidebar.css" rel="stylesheet">
+	<link href="dashboard.css" rel="stylesheet">
+	<link href="sticky-footer.css" rel="stylesheet">
+
+    <title>Keepon Audio Interface</title>
+
+    <!-- Bootstrap core CSS -->
+    <!-- <link href="../../dist/css/bootstrap.min.css" rel="stylesheet"> -->
+
+    <!-- Custom styles for this template -->
+   <!--  <link href="dashboard.css" rel="stylesheet"> -->
+   <style>
+   		button {
+   			width: 100%;
+   			padding-top: 10px;
+   			padding-bottom: 10px;
+   		}
+   	
+   		h3{
+   			color: #fff;
+   		}
+   </style>
+
+</head>
+<body>
+	<nav class="navbar navbar navbar-fixed-top">
+      <!-- <div class="container-fluid"> -->
+        <div class="navbar-header" style='color:white; width:100%'>
+          	<div style="width:40%; display:inline",">
+          		<font size="5">Keepon Audio Interface</font>
+          	</div>
+	        <div style="width:10%; display:inline; float:right">
+	        	</br>
+		        <button onclick='playAudio()'>Play</button>
+	        </div>
+	        
+	        <div style="width:30%; display:inline; float:right">
+	        	<font size="2">Improvisational Text</font>
+		        <input id = 'input-text' textarea class="form-control" rows="3" placeholder="Enter text here." required></textarea>
+	        </div>
+        </div>
+        
+        <<!-- /div> -->
+      <!-- </div> -->
+    </nav>
+
+
+    <div style='height: 20px'> </div>
+	
+	<div id="wrapper">
+	<!-- Sidebar -->
+	     <div class="container-fluid">
+		    	<div class="row">
+		        	<div class="col-sm-2 col-md-2 sidebar">
+		        		<div style='height: 20px'> </div>
+		        		<ul class="nav nav-sidebar">
+		        			<!--<li class="active"><a href="#">Overview <span class="sr-only">(current)</span></a></li>-->
+				        	<li class="active"><button onclick='changePhrases("intro")'>Introduction</button></li>
+			            	<li class="active"><button onclick='changePhrases("drawing")'>Drawing</button></li>
+			            	<li class="active"><button onclick='changePhrases("lego")'>Lego</button></li>
+			            	<li class="active"><button onclick='changePhrases("conflict")'>Conflict</button></li>
+			            	<li class="active"><button onclick='changePhrases("confAna")'>Conflict Analysis</button></li>
+			            	<li class="active"><button onclick='changePhrases("confRes")'>Conflict Resolution</button></li>
+			            	<li class="active"><button onclick='changePhrases("misce")'>Miscellaneous</button></li>
+
+			            	<li class="active"><button onclick='changePhrases("termination")'>Termination</button></li>
+		          		</ul>
+		          	</div>
+
+				<div class="container">
+				    <div class="row">
+				    	<div class="col-sm-6">
+							<!-- <input id='input-text' type='text' placeholder="text entry">
+							<button onclick='playAudio()'>play</button> -->
+
+							<input id='participantA' type='text' placeholder="Participant A" value="<%= locals.pa %>">
+							</br>
+							<% for(var i = 0; i < phrasesleft.length; i++) { %>
+								<button onclick='setAudio("<%= phrasesleft[i] %>")'><%= phrasesleft[i] %></button>
+							<% } %>
+							<audio id='audioelement' src='' type='audio/wav'></audio>
+						</div>
+						<div class = "col-sm-6">
+							<input id='participantB' type='text' placeholder="Participant B" value="<%= locals.pb %>">
+							</br>
+							<% for(var i = 0; i < phrasesright.length; i++) { %>
+								<button onclick='setAudio("<%= phrasesright[i] %>")'><%= phrasesright[i] %></button>
+							<% } %>
+							<audio id='audioelement' src='' type='audio/wav'></audio>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<script>
+		function setAudio(src){
+			src = src.replace('<participantA>', document.getElementById('participantA').value);
+			src = src.replace('<participantB>', document.getElementById('participantB').value);
+			src = encodeURIComponent(src);
+			document.getElementById('audioelement').src = 'audio/' + src + '.wav';
+			document.getElementById('audioelement').currentTime = 0;
+			document.getElementById('audioelement').play();
+		}
+
+		function playAudio(){
+			console.log('playing audio');
+			setAudio(document.getElementById('input-text').value);
+		}
+
+		function changePhrases(type){
+			window.open("?type=" + type + '&pa=' + document.getElementById('participantA').value + '&pb=' + document.getElementById('participantB').value, "_self");
+		}
+	</script>
+</body>
+</html>
