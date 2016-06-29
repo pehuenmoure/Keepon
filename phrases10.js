@@ -6,7 +6,7 @@ var arr = [
 "Do you remember which Lego <participantA> wants?",
 "Do you remember which Lego <participantB> wants?",
 "Do you remember why <participantA> wants that?",
-"Do you remember why <participantA> wants that?",
+"Do you remember why <participantB> wants that?",
 "Do you remember what <participantA> wants to do?",
 "Do you remember what <participantB> wants to do?",
 "Do you remember what <participantA> wants to make?",

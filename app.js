@@ -70,13 +70,9 @@ app.get('/', function(req, res){
 		args.phrasesleft = phrases13;
 		args.phrasesright = empty;
 		res.render('interface', args);
-	}else if (req.query.type == 'misce') {
-		args.phrasesleft = phrases14;
-		args.phrasesright = empty;
-		res.render('interface', args);
 	}else if (req.query.type == 'context-specific') {
-		args.phrasesleft = phrases15;
-		args.phrasesright = empty;
+		args.phrasesleft = phrases14;
+		args.phrasesright = phrases15;
 		res.render('interface', args);
 	}else{
 		args.phrasesleft = empty;

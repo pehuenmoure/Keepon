@@ -12,9 +12,9 @@
 
 	<link href="bootstrap.min.css" rel="stylesheet">
 	<link href="bootstrap-theme.min.css" rel="stylesheet">
-	<link href="simple-sidebar.css" rel="stylesheet">
+	<!-- <link href="simple-sidebar.css" rel="stylesheet"> -->
 	<link href="dashboard.css" rel="stylesheet">
-	<link href="sticky-footer.css" rel="stylesheet">
+	<!-- <link href="sticky-footer.css" rel="stylesheet"> -->
 
     <title>Keepon Audio Interface</title>
 
@@ -23,93 +23,103 @@
 
     <!-- Custom styles for this template -->
    <!--  <link href="dashboard.css" rel="stylesheet"> -->
-   <style>
-   		button {
-   			width: 100%;
-   			padding-top: 10px;
-   			padding-bottom: 10px;
-   		}
-   	
-   		h3{
-   			color: #fff;
-   		}
-   </style>
+
 
 </head>
 <body>
-	<nav class="navbar navbar navbar-fixed-top">
-      <!-- <div class="container-fluid"> -->
-        <div class="navbar-header" style='color:white; width:100%'>
-          	<div style="width:40%; display:inline",">
-          		<font size="5">Keepon Audio Interface</font>
-          	</div>
-	        <div style="width:10%; display:inline; float:right">
-	        	</br>
-		        <button onclick='playAudio()'>Play</button>
-	        </div>
-	        
-	        <div style="width:30%; display:inline; float:right">
-	        	<font size="2">Improvisational Text</font>
-		        <input id = 'input-text' textarea class="form-control" rows="3" placeholder="Enter text here." required></textarea>
-	        </div>
-        </div>
-        
-        <<!-- /div> -->
-      <!-- </div> -->
-    </nav>
+	<div class="screen">
+     	<div class="navbar-header">
+	     	<div class="kai">
+	     		<h1>Keepon Audio Interface</h1>
+	    		</div>
+
+	    		<div class="improv">
+		        <h5>Improvisational Text</h5>
+		     	<div id="text">
+			        <input id='input-text' textarea class="form-control" rows="3" list="options" placeholder="Enter text here." required>
+
+			        <datalist id="options">
+						    <option value="Play together"/>
+						    <option value="Make one together"/>
+						    <option value="Share"/>
+						    <option value="Take turns"/>
+						    <option value="Trade"/>
+						    <option value="Give something nice"/>
+						    <option value="Do something nice"/>
+						</datalist>
+
+				    <button id='playbutton' onclick='playAudio()'>Play</button>
+			     
+	    		</div>
+	     	</div>
+     	</div>
+
+<!-- Sidebar -->
+     	<div class="container">
+	    	<!-- <div class="row"> -->
+	        	<div class="col1-sidebar">
+	        		<ul class="nav-sidebar">
+			        	<li class="active"><button onclick='changePhrases("intro")'>Introduction</button></li>
+		            	<li class="active"><button onclick='changePhrases("drawing")'>Drawing</button></li>
+		            	<li class="active"><button onclick='changePhrases("lego")'>Lego</button></li>
+		            	<li class="active"><button onclick='changePhrases("conflict")'>Conflict</button></li>
+		            	<li class="active"><button onclick='changePhrases("confAna")'>Conflict Analysis</button></li>
+
+		            	<li class="active"><button onclick='changePhrases("confRes")'>Conflict Resolution</button></li>
+
+		            	<li class="active"><button onclick='changePhrases("termination")'>Termination</button></li>
+		            	<!-- <li class="active"><button onclick='changePhrases("context-specific")'>Context Specific</button></li> -->
+	          		</ul>
+	          		
+	          	</div>
+
+	          	<div class="extra">
+	          		<button onclick='changePhrases("context-specific")'>Context Specific</button>
+  				    	<input type="radio" id="hide" name="checking" onclick="ShowHideDiv()" checked>Hide
+  							<input type="radio" id="show" name="checking" onclick="ShowHideDiv()">Show
+  							
+	  						<div id="threeOps" style="display:none">	
+					        <input id='option1' textarea class="form-control" rows="3" list="options" placeholder="Option 1" required>
+					        <input id='option2' textarea class="form-control" rows="3" list="options" placeholder="Option 2" required>
+					        <input id='option3' textarea class="form-control" rows="3" list="options" placeholder="Option 3" required>
+					      </div>
+					    </div>
 
 
-    <div style='height: 20px'> </div>
-	
-	<div id="wrapper">
-	<!-- Sidebar -->
-	     <div class="container-fluid">
-		    	<div class="row">
-		        	<div class="col-sm-2 col-md-2 sidebar">
-		        		<div style='height: 20px'> </div>
-		        		<ul class="nav nav-sidebar">
-		        			<!--<li class="active"><a href="#">Overview <span class="sr-only">(current)</span></a></li>-->
-				        	<li class="active"><button onclick='changePhrases("intro")'>Introduction</button></li>
-			            	<li class="active"><button onclick='changePhrases("drawing")'>Drawing</button></li>
-			            	<li class="active"><button onclick='changePhrases("lego")'>Lego</button></li>
-			            	<li class="active"><button onclick='changePhrases("conflict")'>Conflict</button></li>
-			            	<li class="active"><button onclick='changePhrases("context-specific")'>Context Specific</button></li>
-			            	<li class="active"><button onclick='changePhrases("confAna")'>Conflict Analysis</button></li>
-			            	<li class="active"><button onclick='changePhrases("confRes")'>Conflict Resolution</button></li>
 
-			            	<li class="active"><button onclick='changePhrases("misce")'>Miscellaneous</button></li>
+	      <!-- </div> -->
+	    
 
-			            	<li class="active"><button onclick='changePhrases("termination")'>Termination</button></li>
+			<div class="col2">
+			<!--    <div class="row"> -->
+			    	<div class="col-sm-6">
+						<input id='participantA' type='text' placeholder="Participant A" value="<%= locals.pa %>">
+						</br>
+						<% for(var i = 0; i < phrasesleft.length; i++) { %>
+							<button onclick='setAudio("<%= phrasesleft[i] %>")'><%= phrasesleft[i] %></button>
+						<% } %>
+							
+						<audio id='audioelement' src='' type='audio/wav'></audio>
 
+					</div>
 
-		          		</ul>
-		          	</div>
-
-				<div class="container">
-				    <div class="row">
-				    	<div class="col-sm-6">
-							<!-- <input id='input-text' type='text' placeholder="text entry">
-							<button onclick='playAudio()'>play</button> -->
-
-							<input id='participantA' type='text' placeholder="Participant A" value="<%= locals.pa %>">
-							</br>
-							<% for(var i = 0; i < phrasesleft.length; i++) { %>
-								<button onclick='setAudio("<%= phrasesleft[i] %>")'><%= phrasesleft[i] %></button>
-							<% } %>
-							<audio id='audioelement' src='' type='audio/wav'></audio>
-						</div>
-						<div class = "col-sm-6">
-							<input id='participantB' type='text' placeholder="Participant B" value="<%= locals.pb %>">
-							</br>
-							<% for(var i = 0; i < phrasesright.length; i++) { %>
-								<button onclick='setAudio("<%= phrasesright[i] %>")'><%= phrasesright[i] %></button>
-							<% } %>
-							<audio id='audioelement' src='' type='audio/wav'></audio>
-						</div>
+					<div class = "col-sm-6">
+						<input id='participantB' type='text' placeholder="Participant B" value="<%= locals.pb %>">
+						</br>
+						<% for(var i = 0; i < phrasesright.length; i++) { %>
+							<button onclick='setAudio("<%= phrasesright[i] %>")'><%= phrasesright[i] %></button>
+						<% } %>
+						<audio id='audioelement' src='' type='audio/wav'></audio>
 					</div>
 				</div>
-			</div>
+			<!-- </div> -->
+
+
+
 		</div>
+
+
+
 	</div>
 
 
@@ -117,6 +127,10 @@
 		function setAudio(src){
 			src = src.replace('<participantA>', document.getElementById('participantA').value);
 			src = src.replace('<participantB>', document.getElementById('participantB').value);
+			src = src.replace('<input-text>', document.getElementById('input-text').value);
+			src = src.replace('<option1>', document.getElementById('option1').value);
+			src = src.replace('<option2>', document.getElementById('option2').value);
+			src = src.replace('<option3>', document.getElementById('option3').value);
 			src = encodeURIComponent(src);
 			document.getElementById('audioelement').src = 'audio/' + src + '.wav';
 			document.getElementById('audioelement').currentTime = 0;
@@ -126,11 +140,22 @@
 		function playAudio(){
 			console.log('playing audio');
 			setAudio(document.getElementById('input-text').value);
+
 		}
 
 		function changePhrases(type){
 			window.open("?type=" + type + '&pa=' + document.getElementById('participantA').value + '&pb=' + document.getElementById('participantB').value, "_self");
 		}
+
+    function ShowHideDiv() {
+	    var show = document.getElementById("show");
+	    var threeOps = document.getElementById("threeOps");
+	    threeOps.style.display = show.checked ? "block" : "none";
+		}
+
+		
+
+
 	</script>
 </body>
 </html>
