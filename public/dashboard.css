@@ -162,13 +162,6 @@ ul{
 }
 .nav-sidebar > .active > button {
 }
-
-.nav-sidebar > .active > button:active,
-.nav-sidebar > .active > button:focus{
-  background-color: red;
-  opacity: 0.5;
-}
-
 .nav-sidebar > .active > button:hover{
   background-color: #2098d1;
   color: white;
