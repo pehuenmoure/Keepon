@@ -119,9 +119,15 @@
 		</div>
 
 
+		<div class = "footer">
+			<% for(var i = 0; i < commonphrases.length; i++) { %>
+				<div class = "col-sm-2">
+					<button onclick='setAudio("<%= commonphrases[i] %>")'><%= commonphrases[i] %></button>
+				</div>
+			<% } %>
+		</div>
 
 	</div>
-
 
 	<script>
 		function setAudio(src){
@@ -147,14 +153,11 @@
 			window.open("?type=" + type + '&pa=' + document.getElementById('participantA').value + '&pb=' + document.getElementById('participantB').value, "_self");
 		}
 
-    function ShowHideDiv() {
-	    var show = document.getElementById("show");
-	    var threeOps = document.getElementById("threeOps");
-	    threeOps.style.display = show.checked ? "block" : "none";
+	    function ShowHideDiv() {
+		    var show = document.getElementById("show");
+		    var threeOps = document.getElementById("threeOps");
+		    threeOps.style.display = show.checked ? "block" : "none";
 		}
-
-		
-
 
 	</script>
 </body>

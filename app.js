@@ -16,7 +16,7 @@ var phrases10 = require('./phrases10');
 var phrases11 = require('./phrases11');
 var phrases12 = require('./phrases12');
 var phrases13 = require('./phrases13');
-var phrases14 = require('./phrases14');
+var commonphrases = require('./phrases14');
 var phrases15 = require('./phrases15');
 var names = require('./names');
 var ejs = require('ejs');
@@ -41,7 +41,7 @@ app.get('/', function(req, res){
 	//res.render('interface.ejs');
 	var f = fs.readFileSync(__dirname + '/views/interface.ejs', 'utf-8');
 	//console.log(f);
-	var args = { locals: { pa: req.query.pa, pb: req.query.pb } };
+	var args = { locals: { pa: req.query.pa, pb: req.query.pb }, commonphrases: commonphrases };
 	if(req.query.type == 'intro'){
 		args.phrasesleft = phrases1;
 		args.phrasesright = phrases2;
