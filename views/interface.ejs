@@ -18,6 +18,8 @@
 
     <title>Keepon Audio Interface</title>
 
+   	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
     <!-- Bootstrap core CSS -->
     <!-- <link href="../../dist/css/bootstrap.min.css" rel="stylesheet"> -->
 
@@ -36,17 +38,17 @@
 	    		<div class="improv">
 		        <h5>Improvisational Text</h5>
 		     	<div id="text">
-			        <input id='input-text' textarea class="form-control" rows="3" list="options" placeholder="Enter text here." required>
+			        <input id='input' textarea class="form-control" rows="3" list="options" placeholder="Enter text here." required>
 
 			        <datalist id="options">
-						    <option value="Play together"/>
-						    <option value="Make one together"/>
-						    <option value="Share"/>
-						    <option value="Take turns"/>
-						    <option value="Trade"/>
-						    <option value="Give something nice"/>
-						    <option value="Do something nice"/>
-						</datalist>
+						<option value="Play together"/>
+						<option value="Make one together"/>
+						<option value="Share"/>
+						<option value="Take turns"/>
+						<option value="Trade"/>
+						<option value="Give something nice"/>
+						<option value="Do something nice"/>
+					</datalist>
 
 				    <button id='playbutton' onclick='playAudio()'>Play</button>
 			     
@@ -64,34 +66,35 @@
 		            	<li class="active"><button onclick='changePhrases("lego")'>Lego</button></li>
 		            	<li class="active"><button onclick='changePhrases("conflict")'>Conflict</button></li>
 		            	<li class="active"><button onclick='changePhrases("confAna")'>Conflict Analysis</button></li>
-
 		            	<li class="active"><button onclick='changePhrases("confRes")'>Conflict Resolution</button></li>
-
+		            	<li class="active"><button onclick='changePhrases("context-specific")'>Context Specific</button></li>
 		            	<li class="active"><button onclick='changePhrases("termination")'>Termination</button></li>
-		            	<!-- <li class="active"><button onclick='changePhrases("context-specific")'>Context Specific</button></li> -->
-	          		</ul>
-	          		
+	          		</ul>	
 	          	</div>
 
-	          	<div class="extra">
+	          	<div class="col1-sidebar">
+	        		<ul class="nav-sidebar">
+			        	<li class="active"><button onclick='download()'>Download</button></li>
+
+	          		</ul>	
+	          	</div>
+
+	          	<!-- <div class="extra">
 	          		<button onclick='changePhrases("context-specific")'>Context Specific</button>
   				    	<input type="radio" id="hide" name="checking" onclick="ShowHideDiv()" checked>Hide
-  							<input type="radio" id="show" name="checking" onclick="ShowHideDiv()">Show
-  							
+  						<input type="radio" id="show" name="checking" onclick="ShowHideDiv()">Show
 	  						<div id="threeOps" style="display:none">	
-					        <input id='option1' textarea class="form-control" rows="3" list="options" placeholder="Option 1" required>
-					        <input id='option2' textarea class="form-control" rows="3" list="options" placeholder="Option 2" required>
-					        <input id='option3' textarea class="form-control" rows="3" list="options" placeholder="Option 3" required>
-					      </div>
-					    </div>
+						        <input id='option1' textarea class="form-control" rows="3" list="options" placeholder="Option 1" required>
+						        <input id='option2' textarea class="form-control" rows="3" list="options" placeholder="Option 2" required>
+						        <input id='option3' textarea class="form-control" rows="3" list="options" placeholder="Option 3" required>
+						    </div>
+				</div> -->
 
 
 
-	      <!-- </div> -->
 	    
 
 			<div class="col2">
-			<!--    <div class="row"> -->
 			    	<div class="col-sm-6">
 						<input id='participantA' type='text' placeholder="Participant A" value="<%= locals.pa %>">
 						</br>
@@ -112,17 +115,14 @@
 						<audio id='audioelement' src='' type='audio/wav'></audio>
 					</div>
 				</div>
-			<!-- </div> -->
-
-
 
 		</div>
 
 
 		<div class = "footer">
-			<% for(var i = 0; i < commonphrases.length; i++) { %>
+			<% for(var i = 0; i < phrases14.length; i++) { %>
 				<div class = "col-sm-2">
-					<button onclick='setAudio("<%= commonphrases[i] %>")'><%= commonphrases[i] %></button>
+					<button onclick='setAudio("<%= phrases14[i] %>")'><%= phrases14[i] %></button>
 				</div>
 			<% } %>
 		</div>
@@ -131,22 +131,25 @@
 
 	<script>
 		function setAudio(src){
-			src = src.replace('<participantA>', document.getElementById('participantA').value);
-			src = src.replace('<participantB>', document.getElementById('participantB').value);
-			src = src.replace('<input-text>', document.getElementById('input-text').value);
-			src = src.replace('<option1>', document.getElementById('option1').value);
-			src = src.replace('<option2>', document.getElementById('option2').value);
-			src = src.replace('<option3>', document.getElementById('option3').value);
-			src = encodeURIComponent(src);
-			document.getElementById('audioelement').src = 'audio/' + src + '.wav';
-			document.getElementById('audioelement').currentTime = 0;
-			document.getElementById('audioelement').play();
+			if (!(document.getElementById('participantA').value == '') && !(document.getElementById('participantB').value == '')){
+				src = src.replace(/<participantA>/g, document.getElementById('participantA').value);
+				src = src.replace(/<participantB>/g, document.getElementById('participantB').value);
+				// src = src.replace('<input-text>', document.getElementById('input').value);
+				// src = src.replace('<option1>', document.getElementById('option1').value);
+				// src = src.replace('<option2>', document.getElementById('option2').value);
+				// src = src.replace('<option3>', document.getElementById('option3').value);
+				src = encodeURIComponent(src);
+				document.getElementById('audioelement').src = 'audio/' + src + '.wav';
+				document.getElementById('audioelement').currentTime = 0;
+				document.getElementById('audioelement').play();
+			}else{
+				alert("One or both participant fields are empty.");
+			}
 		}
 
 		function playAudio(){
 			console.log('playing audio');
 			setAudio(document.getElementById('input-text').value);
-
 		}
 
 		function changePhrases(type){
@@ -157,6 +160,20 @@
 		    var show = document.getElementById("show");
 		    var threeOps = document.getElementById("threeOps");
 		    threeOps.style.display = show.checked ? "block" : "none";
+		}
+
+		function download(){
+			// alert('downloading all audio');
+			var pa = document.getElementById('participantA').value;
+			var pb = document.getElementById('participantB').value;
+			var confirmation = "Download all with participants '" + pa + "' and '" + pb + "'?";
+			if(confirm(confirmation)) {
+				$.get("/allaudio?" + 'pa=' + pa + '&pb=' + pb, function(data){
+					alert(data);
+				});
+			} else {
+				alert("Did not download.")
+			}
 		}
 
 	</script>
