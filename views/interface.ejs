@@ -69,15 +69,11 @@
 		            	<li class="active"><button onclick='changePhrases("confRes")'>Conflict Resolution</button></li>
 		            	<li class="active"><button onclick='changePhrases("context-specific")'>Context Specific</button></li>
 		            	<li class="active"><button onclick='changePhrases("termination")'>Termination</button></li>
+		            	<li class="active"><button onclick='download()'>Download</button></li>
 	          		</ul>	
 	          	</div>
 
-	          	<div class="col1-sidebar">
-	        		<ul class="nav-sidebar">
-			        	<li class="active"><button onclick='download()'>Download</button></li>
-
-	          		</ul>	
-	          	</div>
+	          	
 
 	          	<!-- <div class="extra">
 	          		<button onclick='changePhrases("context-specific")'>Context Specific</button>
@@ -156,11 +152,11 @@
 			window.open("?type=" + type + '&pa=' + document.getElementById('participantA').value + '&pb=' + document.getElementById('participantB').value, "_self");
 		}
 
-	    function ShowHideDiv() {
-		    var show = document.getElementById("show");
-		    var threeOps = document.getElementById("threeOps");
-		    threeOps.style.display = show.checked ? "block" : "none";
-		}
+	 //    function ShowHideDiv() {
+		//     var show = document.getElementById("show");
+		//     var threeOps = document.getElementById("threeOps");
+		//     threeOps.style.display = show.checked ? "block" : "none";
+		// }
 
 		function download(){
 			// alert('downloading all audio');

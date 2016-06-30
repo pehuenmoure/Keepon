@@ -126,9 +126,9 @@ app.get('/allaudio', function(req,res){
 	}
 });
 
-var testString = '<nonsense>';
-testString = testString.replace(/<nonsense>/g, 'some sense');
-console.log(testString);
+//var testString = '<nonsense>';
+//testString = testString.replace(/<nonsense>/g, 'some sense');
+//console.log(testString);
 
 app.listen(3000, function(){
 	console.log('started on 3000');

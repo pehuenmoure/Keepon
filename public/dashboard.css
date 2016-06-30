@@ -131,7 +131,10 @@ h3{
   padding: 5px 5px 5px 5px;
   margin-left:10px;
 }
-
+.footer{
+  position: fixed;
+  bottom:0;
+}
 input[type=radio   ]:not(old){
 
   display          : inline-block;
