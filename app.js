@@ -104,14 +104,14 @@ app.get('/audio/:phrase.wav', function(req, res){
 });
 
 app.get('/allaudio', function(req,res){
-	var pa = req.params.pa;
-	var pb = req.params.pb;
+	var pa = req.query.pa;
+	var pb = req.query.pb;
 	var count = 0;
 	console.log('attempting to download all');
 	for (var i = 1; i < 17; i++){
 		var phrases = eval("phrases" + i);
 		console.log(i);
-		for (var j = 0; j < phrases.length; i++){
+		for (var j = 0; j < phrases.length; j++){
 			console.log(j);
 			phrase = phrases[j].replace(/<participantA>/g, pa);
 			phrase = phrase.replace(/<participantB>/g, pb);
