@@ -6,6 +6,7 @@ var arr = [
 	"Trade",
 	"Give something nice",
 	"Do something nice",
+	"Ask to borrow"
 ]
 
 module.exports = arr;

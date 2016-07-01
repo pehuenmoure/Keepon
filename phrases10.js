@@ -1,7 +1,9 @@
 var arr = [ 
 "Let’s all stand up for a minute.",
-"<participantA>, please sit in the other seat.",
-"<participantB>, please sit in the other seat.",
+"<participantA>",
+"Please sit in <participantB> seat.",
+"<participantB>",
+"Please sit in <participantA> seat.",
 "That’s all right. We can still do the step.",
 "Do you remember which Lego <participantA> wants?",
 "Do you remember which Lego <participantB> wants?",

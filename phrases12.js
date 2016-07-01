@@ -8,15 +8,15 @@ var arr = [
 "Can you think of something else the other kid might want?",
 "Is there something you can give to the other kid?",
 "Is there something you can do for the other kid?",
-"Hmm, but only one of you gets what you want with that idea. Is there a way for both of you to get what you want?",
+"But only one of you gets what you want with that idea. Is there a way for both of you to get what you want?",
 "Can you think of a different idea?",
 "I bet you can think of a different idea!",
-"<option>. <option>. These two ideas are kind of the same. Is there a different way?",
+"That idea is kind of the same as what you came up before. Is there a different way?",
 "Which one is your first choice?",
 "Which one is your second choice?",
-"<option>. I heard you both say that.",
-"<option>. <participantA> said they could also do that.",
-"<option>. <participantB> said they could also do that.",
+"<option> I heard you both say that.",
+"<option> <participantA> also said that.",
+"<option> <participantB> also said that.",
 
 ]
 

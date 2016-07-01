@@ -7,10 +7,10 @@ var arr = [
 "That is a second way. Is there another way for both of you to get what you want?",
 "Awesome! You came up with three ways. <option>.<option>.<option>",
 "The last step is for you to choose one of them. Which one can you both agree on?",
-"That sounds like the way to go!",
+"<option> That sounds like the way to go!",
 "<participantA>, do you agree?",
 "<participantB>, do you agree?",
-"Yay! That’s fantastic. You have resolved a conflict! Let’s do what we just agreed on.",
+"Yay! That’s fantastic. You have resolved a conflict!",
 
 ]
 
