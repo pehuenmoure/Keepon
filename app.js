@@ -2,7 +2,6 @@ var express = require('express');
 var server = require('http').Server(app);
 var fs = require('fs');
 var request = require('request');
-var shim = require('es6-shim');
 var app = express();
 var phrases1 = require('./phrases1');
 var phrases2 = require('./phrases2');
@@ -109,13 +108,16 @@ app.get('/allaudio', function(req,res){
 	var pb = req.params.pb;
 	var count = 0;
 	console.log('attempting to download all');
-	for (var i = 1; i < 15; i++){
+	for (var i = 1; i < 17; i++){
 		var phrases = eval("phrases" + i);
+		console.log(i);
 		for (var j = 0; j < phrases.length; i++){
+			console.log(j);
 			phrase = phrases[j].replace(/<participantA>/g, pa);
 			phrase = phrase.replace(/<participantB>/g, pb);
 			var filename = getFileName(phrase);
-			if(!fs.existsSync(filename)){
+			console.log(filename);
+			if(!(fs.existsSync(filename))){
 				count++;
 				getAudio(phrase, function(){ 
 					count--;
@@ -146,7 +148,7 @@ function getAudio(text, finishCallback){
 	var url = urlStart;
 	console.log(url);
 
-	var body = '{ "text": "<speak><prosody pitch=\\"+30Hz\\"><prosody rate=\\"-10.0%\\">' + text + '</prosody></prosody></speak>" }';
+	var body = '{ "text": "<speak><prosody pitch=\\"+10Hz\\"><prosody rate=\\"-10.0%\\">' + text + '</prosody></prosody></speak>" }';
 	console.log(body);
 
 	//var stream = fs.createWriteStream('public/audio/' + 'test' +'.wav');
