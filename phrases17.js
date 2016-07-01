@@ -1,15 +1,14 @@
 var arr = [ 
-"Yes",
-"<participantA>",
-"<participantB>",
-"We can talk about that later.",
-
 "No",
+"We can talk about that later",
+"<participantA>",
 "Ok",
-"Wow", 
+"Maybe",
 "Anything yellow.",
 
-"Maybe",
+"Yes",
+"Wow", 
+"<participantB>",
 "I see!",
 "Very colorful!!",
 "What’s next?",

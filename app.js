@@ -2,6 +2,7 @@ var express = require('express');
 var server = require('http').Server(app);
 var fs = require('fs');
 var request = require('request');
+var shim = require('es6-shim');
 var app = express();
 var phrases1 = require('./phrases1');
 var phrases2 = require('./phrases2');
@@ -18,6 +19,7 @@ var phrases12 = require('./phrases12');
 var phrases13 = require('./phrases13');
 var phrases14 = require('./phrases14');
 var phrases15 = require('./phrases15');
+var phrases16 = require('./phrases16');
 var names = require('./names');
 var ejs = require('ejs');
 var watson = require('watson-developer-cloud');
@@ -43,7 +45,7 @@ app.get('/', function(req, res){
 	//res.render('interface.ejs');
 	var f = fs.readFileSync(__dirname + '/views/interface.ejs', 'utf-8');
 	//console.log(f);
-	var args = { locals: { pa: req.query.pa, pb: req.query.pb }, phrases14: phrases14 };
+	var args = { locals: { pa: req.query.pa, pb: req.query.pb }, phrases14: phrases14, phrases16: phrases16 };
 	if(req.query.type == 'intro'){
 		args.phrasesleft = phrases1;
 		args.phrasesright = phrases2;

@@ -38,17 +38,8 @@
 	    		<div class="improv">
 		        <h5>Improvisational Text</h5>
 		     	<div id="text">
-			        <input id='input' textarea class="form-control" rows="3" list="options" placeholder="Enter text here." required>
+			        <input id='input-text' textarea class="form-control" rows="3" placeholder="Enter text here." required>
 
-			        <datalist id="options">
-						<option value="Play together"/>
-						<option value="Make one together"/>
-						<option value="Share"/>
-						<option value="Take turns"/>
-						<option value="Trade"/>
-						<option value="Give something nice"/>
-						<option value="Do something nice"/>
-					</datalist>
 
 				    <button id='playbutton' onclick='playAudio()'>Play</button>
 			     
@@ -66,29 +57,35 @@
 		            	<li class="active"><button onclick='changePhrases("lego")'>Lego</button></li>
 		            	<li class="active"><button onclick='changePhrases("conflict")'>Conflict</button></li>
 		            	<li class="active"><button onclick='changePhrases("confAna")'>Conflict Analysis</button></li>
+
 		            	<li class="active"><button onclick='changePhrases("confRes")'>Conflict Resolution</button></li>
+		            	
 		            	<li class="active"><button onclick='changePhrases("context-specific")'>Context Specific</button></li>
 		            	<li class="active"><button onclick='changePhrases("termination")'>Termination</button></li>
-		            	<li class="active"><button onclick='download()'>Download</button></li>
-	          		</ul>	
+		            	
+	          		</ul>
+
+	          		<ul class="downloadB">	
+	          			<li class="hovering"><button onclick='download()'>Download</button></li>
+	          		</ul>
+
+	          		<div class="extra">
+
+			    	<input type="radio" id="hide" name="checking" onclick="ShowHideDiv()" checked>Hide
+					<input type="radio" id="show" name="checking" onclick="ShowHideDiv()">Show
+
+					<div id = "confRes-nav" style="display:none">
+			  			<% for(var i = 0; i < phrases16.length; i++) { %>
+						<button onclick='setAudio("<%= phrases16[i] %>")'><%= phrases16[i] %></button>
+						<% } %>
+					</div>
+				</div>
+
+	          		
+
 	          	</div>
 
-	          	
-
-	          	<!-- <div class="extra">
-	          		<button onclick='changePhrases("context-specific")'>Context Specific</button>
-  				    	<input type="radio" id="hide" name="checking" onclick="ShowHideDiv()" checked>Hide
-  						<input type="radio" id="show" name="checking" onclick="ShowHideDiv()">Show
-	  						<div id="threeOps" style="display:none">	
-						        <input id='option1' textarea class="form-control" rows="3" list="options" placeholder="Option 1" required>
-						        <input id='option2' textarea class="form-control" rows="3" list="options" placeholder="Option 2" required>
-						        <input id='option3' textarea class="form-control" rows="3" list="options" placeholder="Option 3" required>
-						    </div>
-				</div> -->
-
-
-
-	    
+          		
 
 			<div class="col2">
 			    	<div class="col-sm-6">
@@ -97,6 +94,7 @@
 						<% for(var i = 0; i < phrasesleft.length; i++) { %>
 							<button onclick='setAudio("<%= phrasesleft[i] %>")'><%= phrasesleft[i] %></button>
 						<% } %>
+							
 							
 						<audio id='audioelement' src='' type='audio/wav'></audio>
 
@@ -108,20 +106,24 @@
 						<% for(var i = 0; i < phrasesright.length; i++) { %>
 							<button onclick='setAudio("<%= phrasesright[i] %>")'><%= phrasesright[i] %></button>
 						<% } %>
+
 						<audio id='audioelement' src='' type='audio/wav'></audio>
 					</div>
 				</div>
 
-		</div>
 
+
+		</div>
 
 		<div class = "footer">
-			<% for(var i = 0; i < phrases14.length; i++) { %>
-				<div class = "col-sm-2">
-					<button onclick='setAudio("<%= phrases14[i] %>")'><%= phrases14[i] %></button>
+					<% for(var i = 0; i < phrases14.length; i++) { %>
+						<div class="bottom-col">
+							<button onclick='setAudio("<%= phrases14[i] %>")'><%= phrases14[i] %></button>
+						</div>
+					<% } %>
 				</div>
-			<% } %>
-		</div>
+
+		
 
 	</div>
 
@@ -131,9 +133,7 @@
 				src = src.replace(/<participantA>/g, document.getElementById('participantA').value);
 				src = src.replace(/<participantB>/g, document.getElementById('participantB').value);
 				// src = src.replace('<input-text>', document.getElementById('input').value);
-				// src = src.replace('<option1>', document.getElementById('option1').value);
-				// src = src.replace('<option2>', document.getElementById('option2').value);
-				// src = src.replace('<option3>', document.getElementById('option3').value);
+		
 				src = encodeURIComponent(src);
 				document.getElementById('audioelement').src = 'audio/' + src + '.wav';
 				document.getElementById('audioelement').currentTime = 0;
@@ -152,11 +152,14 @@
 			window.open("?type=" + type + '&pa=' + document.getElementById('participantA').value + '&pb=' + document.getElementById('participantB').value, "_self");
 		}
 
-	 //    function ShowHideDiv() {
-		//     var show = document.getElementById("show");
-		//     var threeOps = document.getElementById("threeOps");
-		//     threeOps.style.display = show.checked ? "block" : "none";
-		// }
+
+
+	    function ShowHideDiv() {
+	    	var show = document.getElementById("show");
+	    	var confRes = document.getElementById("confRes-nav");
+	    	confRes.style.display = show.checked ? "block" : "none";
+		   
+		}
 
 		function download(){
 			// alert('downloading all audio');

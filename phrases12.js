@@ -11,12 +11,12 @@ var arr = [
 "Hmm, but only one of you gets what you want with that idea. Is there a way for both of you to get what you want?",
 "Can you think of a different idea?",
 "I bet you can think of a different idea!",
-"<input-text>. These two ideas are kind of the same. Is there a different way?",
+"<option>. <option>. These two ideas are kind of the same. Is there a different way?",
 "Which one is your first choice?",
 "Which one is your second choice?",
-"<input-text>. I heard you both say that.",
-"<input-text>. <participantA> said they could also do that.",
-"<input-text>. <participantB> said they could also do that.",
+"<option>. I heard you both say that.",
+"<option>. <participantA> said they could also do that.",
+"<option>. <participantB> said they could also do that.",
 
 ]
 
