@@ -122,7 +122,7 @@ app.get('/allaudio', function(req,res){
 				getAudio(phrase, function(){ 
 					count--;
 					if (count == 0){
-						res.send('Done downloading with ' + pa + 'and ' + pb);
+						res.send('Done downloading with ' + pa + ' and ' + pb);
 					}
 				});
 			}

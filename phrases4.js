@@ -1,6 +1,7 @@
 var arr = [ 
 "Don’t know what to draw? I can help you with some ideas.",
-"How about drawing a picture of me? Ha-ha.",
+"How about drawing a picture of me?",
+"Ha-ha.",
 "Those yellow crayons look very nice. I bet you could draw a great picture of me with them.",
 "Your drawing is looking good!",
 "That’s a great color to add there.",
