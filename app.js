@@ -29,8 +29,8 @@ var watson = require('watson-developer-cloud');
 // For local development, replace username and password
 var textToSpeech = watson.text_to_speech({
   version: 'v1',
-  username: '8540a01a-1a07-475f-824c-0464277491b4',
-  password: 'P47haTPME6Jk'
+  username: '647eef5c-131c-40ad-a7bf-f39b024306bb',
+  password: 'MMcJeTYiJsGx'
 });
 
 app.set('views', __dirname + '/views');
@@ -136,8 +136,8 @@ app.listen(3000, function(){
 	console.log('started on 3000');
 })
 
-var username = '8540a01a-1a07-475f-824c-0464277491b4';
-var password = 'P47haTPME6Jk';
+var username = '647eef5c-131c-40ad-a7bf-f39b024306bb';
+var password = 'MMcJeTYiJsGx';
 var urlStart = "https://stream.watsonplatform.net/text-to-speech/api/v1/synthesize?voice=en-US_AllisonVoice"
 var urlEnd = "&voice=es-ES_EnriqueVoice";
 var auth = "Basic " + new Buffer(username + ":" + password).toString("base64");
