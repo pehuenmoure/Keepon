@@ -13,7 +13,7 @@ var arr = [
 "How did you feel when <participantB> took the Lego from you?",
 "Did it feel good or did it feel bad when <participantA> took the Lego piece from you?",
 "Did it feel good or did it feel bad when <participantB> took the Lego piece from you?",
-
+"Did it feel good or did it feel bad?",
 ]
 
 module.exports = arr;
