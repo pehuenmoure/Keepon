@@ -90,12 +90,12 @@ function getFileName(phrase){
 }
 
 app.get('/audio/:phrase.wav', function(req, res){
-	console.log(req.url);
 	//console.log(res);
 	console.log(req.params.phrase);
 	var phrase = req.params.phrase;
-	var filename = __dirname + '/public/audio/' + phrase + '.wav';
+	var filename = getFileName(phrase);
 	if(fs.existsSync(filename)){
+		console.log('File exists');
 		res.sendFile(filename);
 	} else {
 		getAudio(phrase, function(){ res.sendFile(filename); });
@@ -144,10 +144,10 @@ var auth = "Basic " + new Buffer(username + ":" + password).toString("base64");
 
 function getAudio(text, finishCallback){
 	var url = urlStart;
-	console.log(url);
+	//console.log(url);
 
 	var body = '{ "text": "<speak><prosody pitch=\\"+10Hz\\"><prosody rate=\\"-10.0%\\">' + text + '</prosody></prosody></speak>" }';
-	console.log(body);
+	//console.log('Getting audio for ' + text);
 
 	//var stream = fs.createWriteStream('public/audio/' + 'test' +'.wav');
 	request.post({
