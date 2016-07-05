@@ -11,8 +11,7 @@ var arr = [
 "Can you talk about what you felt like just now?",
 "How did you feel when <participantA> took the Lego from you?",
 "How did you feel when <participantB> took the Lego from you?",
-"Did it feel good or did it feel bad when <participantA> took the Lego piece from you?",
-"Did it feel good or did it feel bad when <participantB> took the Lego piece from you?",
+"Did it feel good or did it feel bad?",
 
 ]
 
