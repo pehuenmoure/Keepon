@@ -110,13 +110,11 @@ app.get('/allaudio', function(req,res){
 	console.log('attempting to download all');
 	for (var i = 1; i < 17; i++){
 		var phrases = eval("phrases" + i);
-		console.log(i);
 		for (var j = 0; j < phrases.length; j++){
 			console.log(j);
 			phrase = phrases[j].replace(/<participantA>/g, pa);
 			phrase = phrase.replace(/<participantB>/g, pb);
 			var filename = getFileName(phrase);
-			console.log(filename);
 			if(!(fs.existsSync(filename))){
 				count++;
 				getAudio(phrase, function(){ 
