@@ -175,3 +175,60 @@ function getAudio(text, finishCallback){
 	    }
 	);
 }
+
+//app.get('/downloadnames', downloadAll());
+
+function downloadAll(){
+	var count = 0;
+	for (var i = 1; i < 17; i++){
+		var phrases = eval("phrases" + i);
+		for(var k=0 ; k < names.length; k++){
+			var pa = names[k];
+			var pb = names[k];
+			console.log('attempting to download' + pa + pb);
+			for (var j = 0; j < phrases.length; j++){
+				phrase = phrases[j].replace(/<participantA>/g, pa);
+				phrase = phrase.replace(/<participantB>/g, pb);
+				var filename = getFileName(phrase);
+				if (!(fs.existsSync(filename))){
+					count++;
+					getAudio(phrase, function(){ 
+						count--;
+						if (count == 0){
+							console.log('Done downloading');
+						}
+					})
+				}
+			}
+		}
+	}
+}
+// for(var k=0 ; k < names.length; k++){
+// 	var pa = names[k];
+// 	var pb = names[k];
+// 	var count = 0;
+// 	console.log('attempting to download' + pa + " , " + pb);
+// 	for (var i = 1; i < 17; i++){
+// 		var phrases = eval("phrases" + i);
+// 		for (var j = 0; j < phrases.length; j++){
+
+// 			phrase = phrases[j].replace(/<participantA>/g, pa);
+// 			phrase = phrase.replace(/<participantB>/g, pb);
+// 			var filename = getFileName(phrase);
+// 			if(!(fs.existsSync(filename))){
+// 				count++;
+// 				getAudio(phrase, function(){ 
+// 					count--;
+// 					if (count == 0){
+// 						console.log('Done downloading with ' + pa + ' and ' + pb);
+// 					}
+// 				});
+// 			}
+// 		}
+// 	}
+// }
+
+
+
+
+

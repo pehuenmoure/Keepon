@@ -1,6 +1,11 @@
 var names = [
-	"John",
-	"Mary"
+	"Jamie",
+	"Benjamin",
+	"Lila",
+	"Lily",
+	"Konstantin",
+	"Connor",
+	"Ella",
 ];
 
 module.exports = names;

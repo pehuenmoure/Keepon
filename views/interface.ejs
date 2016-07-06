@@ -69,6 +69,10 @@
 	          			<li class="hovering"><button onclick='download()'>Download</button></li>
 	          		</ul>
 
+	          		<ul class="downloadB">	
+	          			<li class="hovering"><button onclick='download()'>DownloadAll</button></li>
+	          		</ul>
+
 	          		<div class="extra">
 
 			    	<input type="radio" id="hide" name="checking" onclick="ShowHideDiv()" checked>Hide
@@ -168,7 +172,17 @@
 				$.get("/allaudio?" + 'pa=' + pa + '&pb=' + pb, function(data){
 					alert(data);
 				});
-			
+			} else {
+				alert("Did not download.")
+			}
+		}
+
+		function downloadAll(){
+			var confirmation = "Download all with participants names?";
+			if(confirm(confirmation)) {
+				$.get("/downloadnames", function(data){
+					alert(data);
+				});
 			} else {
 				alert("Did not download.")
 			}
