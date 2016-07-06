@@ -19,6 +19,7 @@ var phrases13 = require('./phrases13');
 var phrases14 = require('./phrases14');
 var phrases15 = require('./phrases15');
 var phrases16 = require('./phrases16');
+var phrases17 = require('./phrases17');
 var names = require('./names');
 var ejs = require('ejs');
 var watson = require('watson-developer-cloud');
@@ -106,26 +107,32 @@ app.get('/audio/:phrase.wav', function(req, res){
 app.get('/allaudio', function(req,res){
 	var pa = req.query.pa;
 	var pb = req.query.pb;
-	var count = 0;
-	console.log('attempting to download all');
-	for (var i = 1; i < 17; i++){
-		var phrases = eval("phrases" + i);
-		for (var j = 0; j < phrases.length; j++){
-			console.log(j);
-			phrase = phrases[j].replace(/<participantA>/g, pa);
-			phrase = phrase.replace(/<participantB>/g, pb);
-			var filename = getFileName(phrase);
-			if(!(fs.existsSync(filename))){
-				count++;
-				getAudio(phrase, function(){ 
-					count--;
-					if (count == 0){
-						res.send('Done downloading with ' + pa + ' and ' + pb);
-					}
-				});
-			}
-		}
-	}
+	// var count = 0;
+	// console.log('attempting to download all');
+	// for (var i = 1; i < 18; i++){
+	// 	var phrases = eval("phrases" + i);
+	// 	for (var j = 0; j < phrases.length; j++){
+	// 		console.log(j);
+	// 		phrase = phrases[j].replace(/<participantA>/g, pa);
+	// 		phrase = phrase.replace(/<participantB>/g, pb);
+	// 		var filename = getFileName(phrase);
+	// 		if(!(fs.existsSync(filename))){
+	// 			count++;
+
+	// 		    setTimeout(function()
+	// 		    {
+	// 		        getAudio(phrase, function(){ 
+	// 					count--;
+	// 					console.log('downloaded a file: ' + count);
+	// 					if (count == 0){
+	// 						res.send('Done downloading with ' + pa + ' and ' + pb);
+	// 					}
+	// 				});
+	// 		    }, 500 * count);
+	// 		}
+	// 	}
+	// }
+	downloada_b(pa, pb, res, 0);
 });
 
 //var testString = '<nonsense>';
@@ -143,6 +150,7 @@ var urlEnd = "&voice=es-ES_EnriqueVoice";
 var auth = "Basic " + new Buffer(username + ":" + password).toString("base64");
 
 function getAudio(text, finishCallback){
+	console.log('starting to download: ' + text);
 	var url = urlStart;
 	//console.log(url);
 
@@ -163,10 +171,14 @@ function getAudio(text, finishCallback){
 	    },
 	    function(err, res){
 	    	if(res){
-		    	fs.writeFileSync('public/audio/' + text + '.wav', res.body);
-		    	if(finishCallback){
-			    	finishCallback();
-			    }
+	    		if (res.body.includes('<HTML><BODY>') || res.body.includes('Forwarding error')){
+	    			console.log('Did not download '+ text);
+	    		}else{
+			    	fs.writeFileSync('public/audio/' + text + '.wav', res.body);
+			    	if(finishCallback){
+				    	finishCallback();
+				    }
+				}
 		    }
 
 		    if(err){
@@ -176,57 +188,55 @@ function getAudio(text, finishCallback){
 	);
 }
 
-//app.get('/downloadnames', downloadAll());
+app.get('/downloadnames', function(req, res){
+	downloadAll(res);
+});
 
-function downloadAll(){
-	var count = 0;
-	for (var i = 1; i < 17; i++){
-		var phrases = eval("phrases" + i);
+function downloadAll(res){
+	
 		for(var k=0 ; k < names.length; k++){
 			var pa = names[k];
 			var pb = names[k];
-			console.log('attempting to download' + pa + pb);
-			for (var j = 0; j < phrases.length; j++){
-				phrase = phrases[j].replace(/<participantA>/g, pa);
-				phrase = phrase.replace(/<participantB>/g, pb);
-				var filename = getFileName(phrase);
-				if (!(fs.existsSync(filename))){
-					count++;
-					getAudio(phrase, function(){ 
-						count--;
-						if (count == 0){
-							console.log('Done downloading');
+			downloada_b(pa, pb, res, 1);
+		}
+	
+}
+
+function downloada_b(pa, pb, res, int){
+	var count = 0;
+	console.log('attempting to download all');
+	for (var i = 1; i < 18; i++){
+		var phrases = eval("phrases" + i);
+		for (var j = 0; j < phrases.length; j++){
+			// console.log(j);
+			var phrase = phrases[j].replace(/<participantA>/g, pa);
+			phrase = phrase.replace(/<participantB>/g, pb);
+			var filename = getFileName(phrase);
+			if(!(fs.existsSync(filename))){
+				console.log('initiating download: ' + phrase);
+				count++;
+			    setTimeout(function(phrase)
+			    {
+			        getAudio(phrase, function(){ 
+			        	if(int == 0){
+							count--;
+							console.log('downloaded a file: ' + count);
+							if (count == 0){
+								res.send('Done downloading with ' + pa + ' and ' + pb);
+							}
+						}else{
+							count--;
+							console.log('downloaded a file: ' + count);
 						}
-					})
-				}
+					});
+			    }, 500 * count, phrase);
+			} else {
+				console.log('not downloading: ' + phrase);
 			}
 		}
 	}
 }
-// for(var k=0 ; k < names.length; k++){
-// 	var pa = names[k];
-// 	var pb = names[k];
-// 	var count = 0;
-// 	console.log('attempting to download' + pa + " , " + pb);
-// 	for (var i = 1; i < 17; i++){
-// 		var phrases = eval("phrases" + i);
-// 		for (var j = 0; j < phrases.length; j++){
 
-// 			phrase = phrases[j].replace(/<participantA>/g, pa);
-// 			phrase = phrase.replace(/<participantB>/g, pb);
-// 			var filename = getFileName(phrase);
-// 			if(!(fs.existsSync(filename))){
-// 				count++;
-// 				getAudio(phrase, function(){ 
-// 					count--;
-// 					if (count == 0){
-// 						console.log('Done downloading with ' + pa + ' and ' + pb);
-// 					}
-// 				});
-// 			}
-// 		}
-// 	}
-// }
 
 
 

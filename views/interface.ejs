@@ -70,7 +70,7 @@
 	          		</ul>
 
 	          		<ul class="downloadB">	
-	          			<li class="hovering"><button onclick='download()'>DownloadAll</button></li>
+	          			<li class="hovering"><button onclick='downloadAll()'>Download All Names</button></li>
 	          		</ul>
 
 	          		<div class="extra">
@@ -180,7 +180,7 @@
 		function downloadAll(){
 			var confirmation = "Download all with participants names?";
 			if(confirm(confirmation)) {
-				$.get("/downloadnames", function(data){
+				$.get("/downloadnames?", function(data){
 					alert(data);
 				});
 			} else {

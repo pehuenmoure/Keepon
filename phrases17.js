@@ -5,7 +5,6 @@ var arr = [
 "Ok",
 "Maybe",
 "Anything yellow.",
-
 "Yes",
 "Wow", 
 "<participantB>",
